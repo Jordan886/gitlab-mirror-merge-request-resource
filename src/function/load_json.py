@@ -8,7 +8,7 @@ class LoadJson:
     try:
       self.api_url = self.data['api_url']
       self.access_token = self.data['access_token']
-      self.source_branch = self.data['password']
-      self.target_branch = self.data['channel']
+      self.source_branch = self.data['source_branch']
+      self.target_branch = self.data['target_branch']
     except:
       raise Exception("Wrong parameters")
