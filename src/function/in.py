@@ -28,7 +28,7 @@ if response.status_code != 200 :
   raise  Exception(f'Gitlab server returned error')  
 
 
-destination = os.path.join(destination_path, 'merge_result.json')
+destination = os.path.join(destination_path, 'merge_list.json')
 
 with open(destination,'w') as file:
     json.dump(response.json(), file, indent=4)
