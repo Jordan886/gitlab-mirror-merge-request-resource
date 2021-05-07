@@ -10,5 +10,6 @@ class LoadJson:
       self.access_token = self.data['access_token']
       self.source_branch = self.data['source_branch']
       self.target_branch = self.data['target_branch']
+      self.title = self.data['title']
     except:
       raise Exception("Wrong parameters")

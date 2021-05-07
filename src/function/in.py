@@ -21,6 +21,7 @@ payload={}
 
 response = requests.request("GET", url, headers=headers, data=payload)
 
+
 if response.status_code != 200 :
   print(f'StatusCode: {response.status_code}')
   print(f'Response: {response.content}')
@@ -30,4 +31,4 @@ if response.status_code != 200 :
 destination = os.path.join(destination_path, 'merge_result.json')
 
 with open(destination,'w') as file:
-    file.write(json.dumps(response.content))
+    json.dump(response.json(), file, indent=4)
