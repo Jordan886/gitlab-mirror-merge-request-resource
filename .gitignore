@@ -138,5 +138,5 @@ dmypy.json
 cython_debug/
 
 # Ignore tests files used for development
-test-ci.json
-merge_list.json
+test-ci*.json
+merge_list*.json

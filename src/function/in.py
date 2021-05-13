@@ -6,7 +6,7 @@ import json
 from pprint import pprint
 from load_json import LoadJson
 
-check_response = []
+in_response = []
 # Load config 
 config = LoadJson(sys.stdin)
 destination_path = sys.argv[1]
