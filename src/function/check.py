@@ -2,7 +2,7 @@
 import sys
 import requests
 import json
-import datetime
+from datetime import datetime
 import urllib.parse
 from pprint import pprint
 from load_json import LoadJson
@@ -10,13 +10,11 @@ from load_json import LoadJson
 # Load config 
 config = LoadJson(sys.stdin)
 
-# Only merge request of this day will be returned
-# yesterday = datetime.date.today() - datetime.timedelta(days=1)
-# print(yesterday.day)
-
+# Gitlab API wants projectID urlencoded when using names
 project_id = urllib.parse.quote(config.project,safe='')
 
-current_day = datetime.datetime.utcnow().replace(day=1, hour=0, minute=0, second=0, microsecond=0).isoformat()
+# Only merged request of the present day are returned
+current_day = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
 
 # Prepare GitlabRequest
 params = ('?' + 
@@ -38,11 +36,10 @@ if response.status_code != 200 :
   print(f'Response: {response.content}')
   raise  Exception(f'Gitlab server returned error')  
 
-# print(json.dumps(check_response))
-
 json_response = response.json()
 
-wanted_keys=['id','title','project_id','source_branch']
+# Create a new object with only relevant info about merge request
+wanted_keys=['iid','title','project_id','source_branch']
 check_response = []
 
 for merge_request in json_response:
@@ -53,5 +50,3 @@ for merge_request in json_response:
   check_response.append(simple_merge)
 
 print(check_response)
-
-# print(json.dumps(check_response))

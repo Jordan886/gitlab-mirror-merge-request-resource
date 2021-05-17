@@ -17,6 +17,15 @@ class LoadJson:
         self.project = self.params['project']
         self.source_branch = self.params['source_branch']
         self.target_branch = self.params['target_branch']
-        self.title = self.params['title']
+        # Optional params
+        if 'delete_source' in self.params:
+          self.delete_source_branch = self.params['delete_source'].lower()
       except:
         raise Exception("Missing parameters")
+    # version is passed in get and put steps
+    if 'version' in self.data :
+      self.version = self.data['version']
+      try:
+        self.id = self.version['iid']
+      except:
+        raise Exception("Version not set")        
