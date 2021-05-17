@@ -5,7 +5,6 @@ import requests
 import json
 import datetime
 import urllib.parse
-from pprint import pprint
 from load_json import LoadJson
 
 # Load config 
