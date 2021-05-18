@@ -19,7 +19,7 @@ class LoadJson:
         self.target_branch = self.params['target_branch']
         # Optional params
         if 'delete_source' in self.params:
-          self.delete_source_branch = self.params['delete_source'].lower()
+          self.delete_source_branch = self.params['delete_source']
       except:
         raise Exception("Missing parameters")
     # version is passed in get and put steps
