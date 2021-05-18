@@ -42,8 +42,8 @@ with open(destination,'w') as file:
 concourse_response = {
   "version": config.version,
   "metadata": [
-    { "name": "title", "value": config.title },
-    { "name": "source_branch", "value": config.source_branch }
+    { "name": "title", "value": json_response['title'] },
+    { "name": "source_branch", "value": json_response['source_branch'] }
   ]
 }
 

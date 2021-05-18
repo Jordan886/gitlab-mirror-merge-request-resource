@@ -8,14 +8,14 @@ class LoadJson:
     try:
       self.api_url = self.source['api_url']
       self.access_token = self.source['access_token']
+      self.project = self.source['project']
+      self.source_branch = self.source['source_branch']
     except:
       raise Exception("Missing required source config")
     # check if also params exist
     if 'params' in self.data :
       self.params = self.data['params']
       try:
-        self.project = self.params['project']
-        self.source_branch = self.params['source_branch']
         self.target_branch = self.params['target_branch']
         # Optional params
         if 'delete_source' in self.params:
