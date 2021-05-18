@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+#VSCode personal settings
+.vscode/
+
+# Ignore tests files used for development
+test-*.json
+merge_list*.json
