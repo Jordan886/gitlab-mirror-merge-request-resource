@@ -1,7 +1,6 @@
 #! /usr/local/bin/python3
 import sys
 import requests
-import json
 from datetime import datetime
 import urllib.parse
 from load_json import LoadJson
