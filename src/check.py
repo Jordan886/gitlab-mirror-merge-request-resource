@@ -1,6 +1,7 @@
 #! /usr/local/bin/python3
 import sys
 import requests
+import json
 from datetime import datetime
 import urllib.parse
 from load_json import LoadJson
@@ -47,4 +48,4 @@ for merge_request in json_response:
       simple_merge[key] = value
   check_response.append(simple_merge)
 
-print(check_response)
+print(json.dumps(check_response))

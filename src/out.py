@@ -55,4 +55,4 @@ concourse_response = {
   ]
 }
 
-print(concourse_response)
+print(json.dumps(concourse_response))
