@@ -45,7 +45,7 @@ for merge_request in json_response:
   simple_merge={}
   for key,value in merge_request.items():
     if key in wanted_keys:
-      simple_merge[key] = value
+      simple_merge[key] = str(value)
   check_response.append(simple_merge)
 
 print(json.dumps(check_response))
