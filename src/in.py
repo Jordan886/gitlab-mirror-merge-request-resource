@@ -38,7 +38,11 @@ destination = os.path.join(destination_path, 'merge_list.json')
 with open(destination,'w') as file:
     json.dump(response.json(), file, indent=4)
 
-# F
+# I will also write the file another time in a predefined position
+# In that way the out script will guess where the file is
+with open('/tmp/merge_list.json','w') as file:
+    json.dump(response.json(), file, indent=4)
+
 concourse_response = {
   "version": config.version,
   "metadata": [

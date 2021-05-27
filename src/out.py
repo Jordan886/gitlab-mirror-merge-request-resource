@@ -18,8 +18,14 @@ source_path = sys.argv[1]
 
 # Read the merge from the input step
 source = os.path.join(source_path, 'merge_list.json')
-with open(source) as file:
-    merge_request = json.loads(file.read())
+# Try to fetch the file from concourse path
+# if not possible rollback to predefined position
+try:
+  with open(source) as file:
+      merge_request = json.loads(file.read())
+except:
+  with open('/tmp/merge_list.json') as file:
+      merge_request = json.loads(file.read())
 
 
 # Prepare GitlabRequest
