@@ -1,4 +1,5 @@
 #! /usr/local/bin/python3
+from posixpath import join
 import sys
 import os
 import requests
@@ -16,17 +17,27 @@ project_id = urllib.parse.quote(config.project,safe='')
 # The filepath will be passed as argument
 source_path = sys.argv[1]
 
-# Read the merge from the input step
-source = os.path.join(source_path, 'merge_list.json')
-# Try to fetch the file from concourse path
-# if not possible rollback to predefined position
-try:
-  with open(source) as file:
-      merge_request = json.loads(file.read())
-except:
-  with open('/tmp/merge_list.json') as file:
-      merge_request = json.loads(file.read())
+# Function for finding in source path which directory holds merge_list.json
+# Next() will walk only in the first directory level
+def find_merge_file(base_path):
+  try:
+    folders=next(os.walk(base_path))[1]
+    for folder in folders:
+      files = os.listdir(os.path.join(base_path,folder))
+      for file in files:
+        if 'merge_list.json' in file:
+          merge_file_path = os.path.join(base_path,folder,file)
+          return merge_file_path
+  except:    
+    raise Exception(f'No input file found in {base_path}, this could be a bug or misconfig)')
 
+source = find_merge_file(source_path)
+
+try:
+  with open(source) as merge_file:
+    merge_request = json.loads(merge_file.read())
+except:
+  raise Exception(f'file {source} not found')
 
 # Prepare GitlabRequest
 params = ''
@@ -54,7 +65,7 @@ json_response = response.json()
 
 
 concourse_response = {
-  "version": config.version,
+  "version": {"iid": str(json_response['iid'])},
   "metadata": [
     { "name": "title", "value": merge_request['title'] },
     { "name": "source_branch", "value": config.source_branch }
