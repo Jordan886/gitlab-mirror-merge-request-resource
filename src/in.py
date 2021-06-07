@@ -9,6 +9,13 @@ from load_json import LoadJson
 
 # Load config 
 config = LoadJson(sys.stdin)
+# Get step after output does not have any id configured
+try:
+  config.id
+except:
+  print(json.dumps({"version": {}}))
+  sys.exit()
+
 
 # Gitlab API wants projectID urlencoded when using names
 project_id = urllib.parse.quote(config.project,safe='')

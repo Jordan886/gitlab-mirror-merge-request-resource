@@ -9,7 +9,7 @@ class LoadJson:
       self.api_url = self.source['api_url']
       self.access_token = self.source['access_token']
       self.project = self.source['project']
-      self.source_branch = self.source['source_branch']
+      self.branch = self.source['branch']
     except:
       raise Exception("Missing required source config")
     # check if also params exist

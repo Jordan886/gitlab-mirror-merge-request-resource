@@ -58,18 +58,20 @@ response = requests.request("POST", url, headers=headers, data=payload)
 if response.status_code not in [200,201] :
   print(f'StatusCode: {response.status_code}')
   print(f'Response: {response.content}')
-  raise  Exception(f'Gitlab server returned error')  
+  raise  Exception(f'Gitlab server returned error {response.status_code}: {response.content}')  
 
 json_response = response.json()
 
 
+# Enable this block triggers a loop so for now the output does not generate any data.
 
-concourse_response = {
-  "version": {"iid": str(json_response['iid'])},
-  "metadata": [
-    { "name": "title", "value": merge_request['title'] },
-    { "name": "source_branch", "value": config.source_branch }
-  ]
-}
+# concourse_response = {
+#   "version": {"iid": str(json_response['iid'])},
+#   "metadata": [
+#     { "name": "title", "value": json_response['title'] },
+#     { "name": "source_branch", "value": json_response['source_branch'] }
+#   ]
+# }
 
-print(json.dumps(concourse_response))
+# print(json.dumps(concourse_response))
+print(json.dumps({"version": {}}))

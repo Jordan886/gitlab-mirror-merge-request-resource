@@ -17,9 +17,9 @@ current_day = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=
 
 # Prepare GitlabRequest
 params = ('?' + 
-          'scope=all' + 
+          'scope=all' +
           '&state=merged' +
-          f'&target_branch={config.source_branch}'
+          f'&target_branch={config.branch}' +
           f'&updated_after={current_day}'
           )
 url = 'https://' + config.api_url + '/api/v4/projects/' + project_id + '/merge_requests' + params
